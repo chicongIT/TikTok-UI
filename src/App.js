@@ -1,25 +1,44 @@
-import logo from './logo.svg';
 import './App.css';
-
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 function App() {
+
+  const [posts, setPosts] = useState([])
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then(res => res.json())
+      .then(posts => {
+        setPosts(posts);
+      })
+
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    }
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    }
+  }, [])
+
+
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div>
+        <button>concactoadai{width}cm</button>
+      </div>
+      <ul>
+        {posts.map(post => (
+          <li key={post.id}>{post.title}</li>
+        ))}
+      </ul>
     </div>
-  );
+  )
 }
 
 export default App;
