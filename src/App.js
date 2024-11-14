@@ -1,44 +1,36 @@
 import '~/App.css';
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { publicRoutes } from '~/routes';
+import { DefaultLayOut } from '~/components/Layout';
+import { Fragment } from 'react';
 function App() {
+    return (
+        <Router>
+            <div className="App">
+                <Routes>
+                    {publicRoutes.map((route, index) => {
+                        const Page = route.component;
+                        let Layout = DefaultLayOut;
+                        if (route.layout) Layout = route.layout;
+                        else if (route.layout === null) Layout = Fragment;
 
-  const [posts, setPosts] = useState([])
-  const [width, setWidth] = useState(window.innerWidth);
-
-  // useEffect(() => {
-  //   fetch("https://jsonplaceholder.typicode.com/posts")
-  //     .then(res => res.json())
-  //     .then(posts => {
-  //       setPosts(posts);
-  //     })
-
-  //   const handleResize = () => {
-  //     setWidth(window.innerWidth);
-  //   }
-  //   window.addEventListener('resize', handleResize);
-
-  //   return () => {
-  //     window.removeEventListener('resize', handleResize);
-  //   }
-  // }, [])
-
-
-
-
-
-  return (
-    <div>
-      <div>
-        <button>concactoadai{width}cm</button>
-      </div>
-      <ul>
-        {posts.map(post => (
-          <li key={post.id}>{post.title}</li>
-        ))}
-      </ul>
-    </div>
-  )
+                        return (
+                            <Route
+                                key={index}
+                                path={route.path}
+                                element={
+                                    <Layout>
+                                        <Page />
+                                    </Layout>
+                                }
+                            />
+                        );
+                    })}
+                </Routes>
+            </div>
+        </Router>
+    );
 }
 
 export default App;
