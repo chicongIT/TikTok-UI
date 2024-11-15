@@ -1,0 +1,15 @@
+.wrapper {
+    // display: flex;
+    flex-direction: row;
+}
+
+.container {
+    display: flex;
+    padding: 20px 0px 26px 8px;
+    width: 100%;
+    min-height: 1000px;
+}
+
+.content {
+    flex: 1;
+}
