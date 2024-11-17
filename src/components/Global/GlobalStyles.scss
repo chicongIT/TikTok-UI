@@ -3,6 +3,8 @@
 
 :root {
     --primary: #ff3b5c;
+    --black: black;
+    --text-color: #333;
 
     // Default layout
     --default-layout-header-height: 60px;
@@ -22,6 +24,14 @@ body {
     font-size: 1.6rem;
     line-height: 1.5;
     text-rendering: optimizeSpeed;
+    // color: var(--text-color);
+
+    button,
+    input,
+    [tabindex] {
+        outline: none;
+        border: none;
+    }
 
     .roboto-thin {
         font-family: 'Roboto', sans-serif;
