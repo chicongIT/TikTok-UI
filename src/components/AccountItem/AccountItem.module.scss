@@ -1,0 +1,23 @@
+.wrapper {
+    display: flex;
+    padding: 9px 16px;
+    cursor: pointer;
+    align-items: center;
+    &:hover {
+        background: rgba(255, 255, 255, 0.04);
+    }
+}
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+.infor {
+    padding-left: 9px;
+}
+// .accountID {
+// }
+.name {
+    color: rgba(255, 255, 255, 0.5);
+    display: flex;
+}
