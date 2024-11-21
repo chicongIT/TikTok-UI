@@ -102,3 +102,13 @@
     padding-left: 7px;
     display: flex;
 }
+
+.more-button {
+    // background-color: transparent;
+
+    font-size: 2rem;
+    margin-left: 20px;
+    padding: 4px 8px;
+    color: var(--white);
+    background-color: var(--black);
+}

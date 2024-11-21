@@ -1,0 +1,20 @@
+.menu-list {
+    min-width: 224px;
+
+    .item {
+        width: 100%;
+        margin-left: 0px;
+        padding: 10px 8px 10px 16px;
+        display: flex;
+        justify-content: flex-start;
+        color: rgba(255, 255, 255, 0.9);
+        &:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+    }
+}
+.wrapper {
+    display: flex;
+    padding-bottom: 8px;
+    flex-direction: column;
+}

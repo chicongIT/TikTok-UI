@@ -29,9 +29,11 @@ body {
 
     button,
     input,
+    a,
     [tabindex] {
         outline: none;
         border: none;
+        text-decoration: none;
     }
 
     .roboto-thin {

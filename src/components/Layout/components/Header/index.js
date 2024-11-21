@@ -6,13 +6,42 @@ import AccountItem from '~/components/AccountItem';
 import Button from '~/components/Button';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faSign, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import {
+    faCircleQuestion,
+    faEarthAsia,
+    faEllipsisVertical,
+    faHouseChimneyCrack,
+    faMagnifyingGlass,
+    faMoon,
+    faSpinner,
+} from '@fortawesome/free-solid-svg-icons';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
-// import Tippy from '@tippyjs/react/headless';
-import Tippy from '@tippyjs/react';
+import Tippy from '@tippyjs/react/headless';
+import Menu from '~/components/Popper/Menu';
+// import Tippy from '@tippyjs/react';
 
 const cx = classNames.bind(styles);
+
+const MEMU_ITEMS = [
+    {
+        icon: <FontAwesomeIcon icon={faHouseChimneyCrack} />,
+        title: 'Create tools',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faEarthAsia} />,
+        title: 'English',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faCircleQuestion} />,
+        title: 'Feedback and help',
+        to: '/feedback',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faMoon} />,
+        title: 'Dark mode',
+    },
+];
 
 function Header() {
     const [searchResults, setSearchResults] = useState([]);
@@ -60,7 +89,12 @@ function Header() {
                 </Tippy>
                 <div className={cx('actions')}>
                     <Button primary>Log in</Button>
-                    <Button outline>Sign up</Button>
+
+                    <Menu item={MEMU_ITEMS}>
+                        <button className={cx('more-button')}>
+                            <FontAwesomeIcon icon={faEllipsisVertical} />
+                        </button>
+                    </Menu>
                 </div>
             </div>
         </header>
