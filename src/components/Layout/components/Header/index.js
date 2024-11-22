@@ -31,6 +31,21 @@ const MEMU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
         title: 'English',
+        children: {
+            title: 'Languages',
+            data: [
+                {
+                    type: 'language',
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    type: 'language',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+            ],
+        },
     },
     {
         icon: <FontAwesomeIcon icon={faCircleQuestion} />,
@@ -40,11 +55,35 @@ const MEMU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faMoon} />,
         title: 'Dark mode',
+        children: {
+            title: 'Dark mode',
+            data: [
+                {
+                    title: 'Use device them',
+                },
+                {
+                    title: 'Dark mode',
+                },
+                {
+                    title: 'Light mode',
+                },
+            ],
+        },
     },
 ];
 
 function Header() {
     const [searchResults, setSearchResults] = useState([]);
+
+    // handle menu changes
+    const handleMenuChange = (menuItem) => {
+        switch (menuItem.type) {
+            case 'language':
+                // handle change language
+                break;
+            default:
+        }
+    };
 
     useEffect(() => {
         setTimeout(() => {
@@ -88,9 +127,11 @@ function Header() {
                     </div>
                 </Tippy>
                 <div className={cx('actions')}>
-                    <Button primary>Log in</Button>
+                    <Button className={cx('login-button')} primary>
+                        Log in
+                    </Button>
 
-                    <Menu item={MEMU_ITEMS}>
+                    <Menu item={MEMU_ITEMS} onChange={handleMenuChange}>
                         <button className={cx('more-button')}>
                             <FontAwesomeIcon icon={faEllipsisVertical} />
                         </button>
