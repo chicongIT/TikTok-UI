@@ -5,7 +5,14 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 function MenuItem({ data, onClick }) {
     return (
-        <Button className={cx('item')} leftIcon={data.icon} to={data.to} onClick={onClick}>
+        <Button
+            className={cx('item', {
+                separate: data.separate,
+            })}
+            leftIcon={data.icon}
+            to={data.to}
+            onClick={onClick}
+        >
             {data.title}
         </Button>
     );

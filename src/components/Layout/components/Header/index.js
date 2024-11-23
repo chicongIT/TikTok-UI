@@ -8,22 +8,30 @@ import Button from '~/components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleQuestion,
+    faCoins,
     faEarthAsia,
     faEllipsisVertical,
+    faGear,
     faHouseChimneyCrack,
+    faInbox,
     faMagnifyingGlass,
     faMoon,
+    faPlus,
+    faSignOut,
     faSpinner,
+    faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
-import Tippy from '@tippyjs/react/headless';
+import HeadlessTippy from '@tippyjs/react/headless';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 import Menu from '~/components/Popper/Menu';
-// import Tippy from '@tippyjs/react';
 
 const cx = classNames.bind(styles);
 
-const MEMU_ITEMS = [
+const currentUser = true;
+const MENU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faHouseChimneyCrack} />,
         title: 'Create tools',
@@ -59,7 +67,7 @@ const MEMU_ITEMS = [
             title: 'Dark mode',
             data: [
                 {
-                    title: 'Use device them',
+                    title: 'Use device theme',
                 },
                 {
                     title: 'Dark mode',
@@ -69,6 +77,31 @@ const MEMU_ITEMS = [
                 },
             ],
         },
+    },
+];
+
+const userMenu = [
+    {
+        icon: <FontAwesomeIcon icon={faUser} />,
+        title: 'View profile',
+        to: '/@hoaa',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faCoins} />,
+        title: 'Get coins',
+        to: '/coin',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faGear} />,
+        title: 'Settings',
+        to: '/settings',
+    },
+    ...MENU_ITEMS,
+    {
+        icon: <FontAwesomeIcon icon={faSignOut} />,
+        title: 'Log out',
+        to: '/logout',
+        separate: true,
     },
 ];
 
@@ -97,7 +130,7 @@ function Header() {
                 <div className={cx('logo')}>
                     <img src={images.logo} alt="tiktok" />
                 </div>
-                <Tippy
+                <HeadlessTippy
                     interactive
                     visible={searchResults.length > 0}
                     render={(attrs) => (
@@ -125,16 +158,38 @@ function Header() {
                             <FontAwesomeIcon icon={faMagnifyingGlass} />
                         </button>
                     </div>
-                </Tippy>
+                </HeadlessTippy>
                 <div className={cx('actions')}>
-                    <Button className={cx('login-button')} primary>
-                        Log in
-                    </Button>
-
-                    <Menu item={MEMU_ITEMS} onChange={handleMenuChange}>
-                        <button className={cx('more-button')}>
-                            <FontAwesomeIcon icon={faEllipsisVertical} />
-                        </button>
+                    {currentUser ? (
+                        <>
+                            <Button rounded leftIcon={<FontAwesomeIcon icon={faPlus} />} className={cx('upload-btn')}>
+                                Upload
+                            </Button>
+                            <Tippy delay={[0, 200]} content="Inbox" placement="bottom">
+                                <button className={cx('inbox-btn')}>
+                                    <FontAwesomeIcon icon={faInbox} />
+                                </button>
+                            </Tippy>
+                        </>
+                    ) : (
+                        <>
+                            <Button className={cx('login-button')} primary>
+                                Log in
+                            </Button>
+                        </>
+                    )}
+                    <Menu item={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
+                        {currentUser ? (
+                            <img
+                                src="https://p9-sign-sg.tiktokcdn.com/aweme/1080x1080/tos-alisg-avt-0068/eac633999375c6c4351543884b66f4c5.jpeg?lk3s=a5d48078&nonce=86193&refresh_token=6732b709a41f82c3eb9b2925dc926be8&x-expires=1732471200&x-signature=gdt30742v3DwEfWWoSTz4%2BmGKMs%3D&shp=a5d48078&shcp=81f88b70"
+                                className={cx('user-avatar')}
+                                alt="Jack - J97"
+                            />
+                        ) : (
+                            <button className={cx('more-button')}>
+                                <FontAwesomeIcon icon={faEllipsisVertical} />
+                            </button>
+                        )}
                     </Menu>
                 </div>
             </div>
