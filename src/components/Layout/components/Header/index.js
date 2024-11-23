@@ -13,7 +13,6 @@ import {
     faEllipsisVertical,
     faGear,
     faHouseChimneyCrack,
-    faInbox,
     faMagnifyingGlass,
     faMoon,
     faPlus,
@@ -27,6 +26,8 @@ import HeadlessTippy from '@tippyjs/react/headless';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import Menu from '~/components/Popper/Menu';
+import { InboxIcon } from '~/components/Icons';
+import Image from '~/components/Image';
 
 const cx = classNames.bind(styles);
 
@@ -167,7 +168,7 @@ function Header() {
                             </Button>
                             <Tippy delay={[0, 200]} content="Inbox" placement="bottom">
                                 <button className={cx('inbox-btn')}>
-                                    <FontAwesomeIcon icon={faInbox} />
+                                    <InboxIcon />
                                 </button>
                             </Tippy>
                         </>
@@ -180,10 +181,11 @@ function Header() {
                     )}
                     <Menu item={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
-                            <img
+                            <Image
                                 src="https://p9-sign-sg.tiktokcdn.com/aweme/1080x1080/tos-alisg-avt-0068/eac633999375c6c4351543884b66f4c5.jpeg?lk3s=a5d48078&nonce=86193&refresh_token=6732b709a41f82c3eb9b2925dc926be8&x-expires=1732471200&x-signature=gdt30742v3DwEfWWoSTz4%2BmGKMs%3D&shp=a5d48078&shcp=81f88b70"
                                 className={cx('user-avatar')}
                                 alt="Jack - J97"
+                                fallBack="https://i.pinimg.com/736x/f7/c3/ab/f7c3ab7931ba3dbac1b9825db2d64441.jpg"
                             />
                         ) : (
                             <button className={cx('more-button')}>
