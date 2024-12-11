@@ -1,23 +1,18 @@
 import classNames from 'classnames/bind';
 import styles from './AccountItem.module.scss';
 import Image from '../Image';
+import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
-function AccountItem() {
+function AccountItem({ data }) {
     return (
-        <div className={cx('wrapper')}>
-            <Image
-                className={cx('avatar')}
-                src={
-                    'https://p16-sign-sg.tiktokcdn.com/aweme/1080x1080/tos-alisg-avt-0068/f93b52215054d62002e4c5a85870bae7.jpeg?lk3s=a5d48078&nonce=59209&refresh_token=2a2a6d0b35feb05f3d074334e9d11ef5&x-expires=1732118400&x-signature=jHGPR1GtHJKJCAqTLNsGOYVsnGs%3D&shp=a5d48078&shcp=81f88b70'
-                }
-                alt="Matmotmi"
-            />
+        <Link to={`/@${data.nickname}`} className={cx('wrapper')}>
+            <Image className={cx('avatar')} src={data.avatar} alt={data.full_name} />
             <div className={cx('infor')}>
-                <h4 className={cx('accountID')}>matmotmiclothing</h4>
-                <h5 className={cx('name')}>Mắt Một Mí</h5>
+                <h4 className={cx('name')}>{data.full_name}</h4>
+                <h5 className={cx('accountID')}>{data.nickname}</h5>
             </div>
-        </div>
+        </Link>
     );
 }
 

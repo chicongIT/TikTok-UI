@@ -54,7 +54,16 @@
 }
 
 .load {
-    display: none;
+    animation: spriner 0.8s linear infinite;
+}
+
+@keyframes spriner {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(260deg);
+    }
 }
 
 .search-icon {
